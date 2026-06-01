@@ -9,7 +9,7 @@ import { GuestAvatar } from '../components/GuestAvatar';
 const PAGE_SIZE = 60;
 
 export function DirectoryPage() {
-  const { data, isLoading, isFetching, error, refetch } = useQuery(guestsQuery);
+  const { data, isLoading, error } = useQuery(guestsQuery);
   const [query, setQuery] = useState('');
   const [limit, setLimit] = useState(PAGE_SIZE);
   const deferredQuery = useDeferredValue(query);
@@ -49,12 +49,6 @@ export function DirectoryPage() {
         <span className="font-mono text-[12px] text-[var(--color-muted)]">
           {results.length} {results.length === 1 ? 'match' : 'matches'}
         </span>
-        <button
-          onClick={() => refetch()}
-          className="rounded-full border border-[var(--color-line)] bg-white px-4 py-2 text-[12px] font-medium card-hover"
-        >
-          {isFetching ? 'Refreshing…' : 'Refresh'}
-        </button>
       </div>
 
       {isLoading && <p className="text-[14px] text-[var(--color-muted)]">Loading guests…</p>}
